@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  api:
+    image: challenge/api
+    environment:
+      - SECRET=Konan
+      - MONGO=mongodb://mongo/choco
+    ports:
+      - 9000:9000
+    links:
+      - mongo
+
+  web:
+    image: challenge/web
+    environment:
+      - NEXT_PUBLIC_API=http://api:9000
+    volumes:
+      - ./web/.env.local:/usr/src/current/.env.production:rw
+    ports:
+      - 3000:3000
+  
+  mongo:
+    image: mongo
+    volumes:
+      - data:/data/db
+    ports:
+      - 27017:27017
+  
+volumes:
+  data:

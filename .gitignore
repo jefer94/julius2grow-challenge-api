@@ -1,0 +1,7 @@
+dist
+node_modules
+coverage
+.next
+yarn-error.log
+.env
+uploads
